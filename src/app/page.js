@@ -1,53 +1,45 @@
 import Image from "next/image";
 import BusBg from "../../public/busBg.png";
-import BusLogo from "../../public/busLogo.png";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { VscAccount } from "react-icons/vsc";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
     <div>
-      <nav className="bg-white h-24 border border-purple-900 flex items-center justify-between">
-        <div className="flex items-center">
-          <div className="text-[1.1rem] ml-[3rem]">BookBus</div>
-          <div className="h-[1.25rem] bg-[#e0e0e0] mx-[3.5rem] w-[1px]"></div>
-          <Image src={BusLogo} className="w-[6.5rem] rounded-md" />
-        </div>
-        <div>
-          <DropdownMenu>
-            <DropdownMenuTrigger className="mr-[2rem] flex justify-center items-center outline-none">
-              <VscAccount className="text-[1.3rem] mr-1.5" />
-              Account
-              <MdKeyboardArrowDown />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem>Dashboard</DropdownMenuItem>
-              <DropdownMenuItem>Ticket Booking</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </nav>
+      <Navbar />
       <div className="relative">
         <div className="w-full flex items-center justify-center absolute top-[6rem] font-sans">
           <div className="text-[#ffffff] text-[2rem] font-bold">
             India's No. 1 Online Bus Ticket Booking Site
           </div>
         </div>
-        <div className="absolute top-[6rem]">
-          <div className="bg-white"></div>
-          <button className="bg-[#d84e55] text-white w-[4rem] h-[3rem] rounded-r-full">
+        <div className="absolute top-[11rem] flex w-full justify-center items-center font-sans">
+          <label
+            htmlFor="start"
+            className="bg-white w-[13rem] cursor-pointer h-[7.5rem] rounded-l-[2rem] flex-col flex justify-center items-center"
+          >
+            <span className="text-gray-400 text-[15px] mr-auto ml-6">From</span>
+            <input
+              id="start"
+              className="mt-1 ml-6 w-[88%] outline-none font-medium cursor-pointer text-[1.3rem]"
+            />
+          </label>
+
+          <label
+            htmlFor="end"
+            className="bg-white w-[13rem] cursor-pointer h-[7.5rem] flex-col flex justify-center items-center border border-l-gray-200"
+          >
+            <span className="text-gray-400 text-[15px] mr-auto ml-6">To</span>
+            <input
+              id="end"
+              className="mt-1 ml-6 w-[88%] font-medium outline-none cursor-pointer text-[1.3rem]"
+            />
+          </label>
+
+          <button className="bg-[#d84e55] text-white w-[15rem] h-[120px] font-bold text-[1.3rem] rounded-r-[2rem]">
             SERCH BUSES
           </button>
         </div>
-        <Image src={BusBg} />
+        <Image src={BusBg} className="" />
       </div>
     </div>
   );
