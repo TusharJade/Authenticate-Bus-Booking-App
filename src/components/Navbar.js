@@ -11,7 +11,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 
 const Navbar = () => {
   return (
-    <nav className="bg-white h-24 flex items-center justify-between">
+    <nav className="bg-white h-24 flex items-center justify-between shadow">
       <div className="flex items-center">
         <div className="text-[1.1rem] ml-[3rem]">BookBus</div>
         <div className="h-[1.25rem] bg-[#e0e0e0] mx-[3.5rem] w-[1px]"></div>
