@@ -3,6 +3,7 @@ import { TbSteeringWheel } from "react-icons/tb";
 import { useState } from "react";
 import Seats from "./Seats";
 import BackSeat from "./BackSeat";
+import SeatBookingContainer from "./SeatBookingContainer";
 
 const BusDetailsComponent = ({ busData }) => {
   const [seatsView, setSeatsView] = useState(false);
@@ -143,34 +144,13 @@ const BusDetailsComponent = ({ busData }) => {
             </div>
 
             {/* Proceed to book */}
-            <div className="bg-white w-[18rem] pb-3 px-4 mt-14 shadow">
-              <div className="font-medium mt-2">Boarding & Dropping</div>
-              <div className="relative text-[14px] mt-3.5 mb-5">
-                <div className="w-1 h-1 bg-black rounded-full"></div>
-                <div className="border-dashed border-[0.1px] border-gray-500 absolute -left-2.5 top-4 w-6 rotate-90"></div>
-                <div className="w-1 h-1 bg-gray-400 rounded-full mt-[25px]"></div>
-                <span className="absolute -top-2 left-2.5">Mumbai</span>
-                <span className="absolute top-5 left-2.5">Kalyan</span>
-              </div>
-              <div className="border-y mt-2 py-3 border-[#ddd] text-[14px] font-medium flex justify-between items-center">
-                <span className="text-[15px] font-medium">Seat No.</span>
-                <span>
-                  {currentSelected.map((num, i) =>
-                    i === 0 ? num : `, ${num}`
-                  )}
-                </span>
-              </div>
-              <div className="text-[15px] font-medium mt-2">Fare Details</div>
-              <div className="flex justify-between text-[12.5px] mt-1">
-                <div>Amount</div>
-                <div className="font-semibold">
-                  INR {currentSelected.length * busData.fare}
-                </div>
-              </div>
-              <button className="text-white font-light text-[14.5px] bg-[#d84e55] py-1 w-full mt-4">
-                Proceed To Book
-              </button>
-            </div>
+            {currentSelected.length > 0 && (
+              <SeatBookingContainer
+                currentSelected={currentSelected}
+                setCurrentSelected={setCurrentSelected}
+                busData={busData}
+              />
+            )}
           </div>
         )}
       </div>
