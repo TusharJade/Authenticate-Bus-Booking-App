@@ -2,28 +2,11 @@
 
 import BusDetailsComponent from "@/components/BusDetailsComponent";
 import Navbar from "@/components/Navbar";
+import { useBusBookingContext } from "@/context/BusBookingContext";
 import { BsArrowRight } from "react-icons/bs";
 
 const page = () => {
-  const busData = [
-    {
-      busName: "SHRI MAMATA TRAVELS",
-      fare: 450,
-      seatsAvailable: 5,
-      rating: 4.2,
-      seatsBooked: [
-        {
-          seatNunmber: 0,
-          booked: false,
-          gender: "",
-          Name: "",
-          email: "",
-          dateOfBooking: "",
-        },
-      ],
-    },
-  ];
-
+  const { busData } = useBusBookingContext();
   return (
     <div className="pb-6">
       <Navbar />
@@ -40,7 +23,11 @@ const page = () => {
         </button>
       </div>
 
-      <BusDetailsComponent />
+      <div className="flex gap-4 flex-col">
+        {busData.map((busData) => (
+          <BusDetailsComponent busData={busData} />
+        ))}
+      </div>
     </div>
   );
 };
