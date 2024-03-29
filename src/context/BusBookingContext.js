@@ -31,6 +31,7 @@ export const BusBookingContextProvider = ({ children }) => {
       seatsBooked: [],
     },
   ]);
+
   return (
     <BusBookingContext.Provider value={{ busData, setBusData }}>
       {children}
