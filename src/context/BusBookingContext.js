@@ -13,7 +13,6 @@ export const BusBookingContextProvider = ({ children }) => {
       seatsAvailable: 32,
       rating: 4.2,
       seatsBooked: [],
-      tickets: [],
     },
     {
       busNumber: 9039,
@@ -22,7 +21,6 @@ export const BusBookingContextProvider = ({ children }) => {
       seatsAvailable: 32,
       rating: 4.4,
       seatsBooked: [],
-      ticket: [],
     },
     {
       busNumber: 8502,
@@ -31,7 +29,6 @@ export const BusBookingContextProvider = ({ children }) => {
       seatsAvailable: 32,
       rating: 3.9,
       seatsBooked: [],
-      ticket: [],
     },
   ]);
 

@@ -3,6 +3,7 @@
 import BusDetailsComponent from "@/components/BusDetailsComponent";
 import Navbar from "@/components/Navbar";
 import { useBusBookingContext } from "@/context/BusBookingContext";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 
@@ -15,15 +16,20 @@ const page = () => {
       end: "",
     },
   });
+  const router = useRouter();
 
   useEffect(() => {
-    setModify((prev) => ({
-      ...prev,
-      location: {
-        start: JSON.parse(localStorage.getItem("INFO")).location.start,
-        end: JSON.parse(localStorage.getItem("INFO")).location.end,
-      },
-    }));
+    if (localStorage.getItem("INFO")) {
+      setModify((prev) => ({
+        ...prev,
+        location: {
+          start: JSON.parse(localStorage.getItem("INFO")).location.start,
+          end: JSON.parse(localStorage.getItem("INFO")).location.end,
+        },
+      }));
+    } else {
+      router.push("/");
+    }
   }, []);
 
   const searchHandle = () => {
@@ -38,7 +44,7 @@ const page = () => {
 
   return (
     <div className="pb-6">
-      <Navbar stops={modifty.location} />
+      <Navbar />
 
       <div className="font-bold text-[15px] pl-5 mt-6">
         {modifty.location.start} to {modifty.location.end} Buses

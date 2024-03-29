@@ -37,17 +37,21 @@ const Navbar = ({ stops, setError }) => {
               <Link href="/dashboard">Dashboard</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <button
-                onClick={() => {
-                  stops.start.length > 0 && stops.end.length > 0
-                    ? router.push("/booking")
-                    : toast.error(
-                        "Please select both destinations to start booking"
-                      ) && setError(true);
-                }}
-              >
-                Ticket Booking
-              </button>
+              {stops && setError ? (
+                <button
+                  onClick={() => {
+                    stops.start.length > 0 && stops.end.length > 0
+                      ? router.push("/booking")
+                      : toast.error(
+                          "Please select both destinations to start booking"
+                        ) && setError(true);
+                  }}
+                >
+                  Ticket Booking
+                </button>
+              ) : (
+                <Link href="/booking">Ticket Booking</Link>
+              )}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

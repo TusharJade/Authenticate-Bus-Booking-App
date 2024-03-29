@@ -10,6 +10,7 @@ import {
 import { useBusBookingContext } from "@/context/BusBookingContext";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
 
 const SeatBookingContainer = ({
   currentSelected,
@@ -17,17 +18,17 @@ const SeatBookingContainer = ({
   setCurrentSelected,
 }) => {
   const { busData, setBusData } = useBusBookingContext();
-  const [userData, setUserData] = useState([
-    { name: "", gender: "", gmail: "", seatNum: "" },
-  ]);
+  const [userData, setUserData] = useState([]);
   const closeRef = useRef();
 
   useEffect(() => {
     const newData = currentSelected.map((seatNum) => ({
+      id: uuidv4(),
       name: "",
       gender: "",
       gmail: "",
       seatNum: seatNum,
+      date: new Date(),
     }));
     setUserData(newData);
   }, [currentSelected]);
@@ -39,7 +40,6 @@ const SeatBookingContainer = ({
         newBusData.busNumber === busDataPrev.busNumber
           ? {
               ...newBusData,
-              tickets: [...newBusData.tickets, userData],
               seatsBooked: [...newBusData.seatsBooked, ...userData],
             }
           : newBusData
@@ -56,7 +56,6 @@ const SeatBookingContainer = ({
           prevBus.busNumber === busDataPrev.busNumber
             ? {
                 ...prevBus,
-                tickets: [...prevBus.tickets, userData],
                 seatsBooked: [...prevBus.seatsBooked, ...userData],
               }
             : prevBus
@@ -146,7 +145,7 @@ const SeatBookingContainer = ({
                     </label>
                     <input
                       id={`${"Gmail" + i}`}
-                      type="gmail"
+                      type="email"
                       required
                       className="w-full outline-none border border-gray-300 rounded-sm mt-1.5 py-1 px-2"
                       onChange={(e) =>
