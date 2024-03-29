@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${inter.className} bg-[#fefefe]`}>
         <BusBookingContextProvider>{children}</BusBookingContextProvider>
-        <ToastContainer />
+        <ToastContainer autoClose={2000} />
       </body>
     </html>
   );

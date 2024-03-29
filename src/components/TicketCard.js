@@ -12,7 +12,7 @@ import { format } from "date-fns";
 import { useBusBookingContext } from "@/context/BusBookingContext";
 import { toast } from "react-toastify";
 
-const TicketCard = ({ busTicket, ticketNum, busNum }) => {
+const TicketCard = ({ busTicket, busNum }) => {
   const { busData, setBusData } = useBusBookingContext();
   const [edit, setEdit] = useState({
     state: false,
@@ -41,6 +41,7 @@ const TicketCard = ({ busTicket, ticketNum, busNum }) => {
           : prev
       )
     );
+    toast.success("Ticket cancelled successfully");
   };
 
   const editHandler = () => {
@@ -70,8 +71,6 @@ const TicketCard = ({ busTicket, ticketNum, busNum }) => {
     <div className="max-h-[20rem] overflow-auto scrollbar-container w-[24rem]">
       <div className="bg-white shadow border border-gray-200 px-4 py-2 mb-4">
         <div className="flex gap-2 items-center">
-          <div className="text-gray-600">Ticket No. {ticketNum + 1}</div>
-          <div className="w-[2px] h-3.5 bg-gray-400"></div>
           <div className="font-medium">Seat No. {busTicket?.seatNum}</div>
           <div className="w-[2px] h-3.5 bg-gray-400"></div>
           <div className="font-medium">Bus No. {busNum}</div>

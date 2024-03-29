@@ -13,10 +13,9 @@ const page = () => {
         <div className="flex flex-wrap m-6 gap-x-5 gap-y-2">
           {busData?.map((prevBus) =>
             prevBus?.seatsBooked?.length > 0
-              ? prevBus?.seatsBooked?.map((busTicket, num) => (
+              ? prevBus?.seatsBooked?.map((busTicket) => (
                   <TicketCard
                     busTicket={busTicket}
-                    ticketNum={num}
                     busNum={prevBus?.busNumber}
                   />
                 ))

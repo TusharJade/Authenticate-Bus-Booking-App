@@ -28,7 +28,7 @@ const SeatBookingContainer = ({
       gender: "",
       gmail: "",
       seatNum: seatNum,
-      date: new Date(),
+      date: JSON.parse(localStorage.getItem("INFO")).date,
     }));
     setUserData(newData);
   }, [currentSelected]);
