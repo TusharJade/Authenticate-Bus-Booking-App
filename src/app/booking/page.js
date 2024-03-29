@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 
 const page = () => {
-  const { busData, dateAndLocation } = useBusBookingContext();
+  const { busData } = useBusBookingContext();
   const [modifty, setModify] = useState({
     state: false,
     location: {
@@ -38,7 +38,7 @@ const page = () => {
 
   return (
     <div className="pb-6">
-      <Navbar />
+      <Navbar stops={modifty.location} />
 
       <div className="font-bold text-[15px] pl-5 mt-6">
         {modifty.location.start} to {modifty.location.end} Buses

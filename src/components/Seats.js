@@ -1,3 +1,4 @@
+import { useBusBookingContext } from "@/context/BusBookingContext";
 import React from "react";
 import { toast } from "react-toastify";
 
@@ -7,17 +8,32 @@ const Seats = ({
   seat,
   startingSeat,
   deck,
+  busNumber,
 }) => {
+  const { busData } = useBusBookingContext();
+  const selectedBusData = busData.find((prev) => prev.busNumber === busNumber);
+  // console.log("sa", selectedBusData);
   return (
     <>
       {Array(seat)
         .fill(startingSeat)
         .map((num, n) => num + n + deck)
         .map((item) => (
-          <div
-            className={`border-[1.5px] border-gray-300 h-[25px] w-12 cursor-pointer relative ${
+          <button
+            className={`border-[1.5px] border-gray-300 h-[25px] w-12 relative ${
               currentSelected.includes(item) && "bg-gray-600"
+            } ${
+              selectedBusData.seatsBooked.find(
+                (prev) => prev.seatNum === item
+              ) && "bg-[#cbcbcb]"
+            } ${
+              selectedBusData.seatsBooked.find(
+                (prev) => prev.seatNum === item && prev.gender === "Female"
+              ) && "bg-[#f1a9a0]"
             }`}
+            disabled={selectedBusData.seatsBooked.find(
+              (prev) => prev.seatNum === item
+            )}
             onClick={() =>
               currentSelected.includes(item)
                 ? setCurrentSelected((seat) =>
@@ -36,7 +52,7 @@ const Seats = ({
               </div>
             )}
             <div className="border-[1.5px] border-gray-300 w-[7.5px] h-[14px] rounded-[2px] ml-auto my-1 mr-[2px]"></div>
-          </div>
+          </button>
         ))}
     </>
   );

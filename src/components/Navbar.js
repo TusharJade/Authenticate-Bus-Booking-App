@@ -8,14 +8,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { VscAccount } from "react-icons/vsc";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
-const Navbar = () => {
+const Navbar = ({ stops, setError }) => {
+  const router = useRouter();
   return (
     <nav className="bg-white h-24 flex items-center justify-between shadow">
       <div className="flex items-center">
-        <div className="text-[1.1rem] ml-[3rem]">BookBus</div>
+        <Link className="text-[1.1rem] ml-[3rem]" href="/">
+          BookBus
+        </Link>
         <div className="h-[1.25rem] bg-[#e0e0e0] mx-[3.5rem] w-[1px]"></div>
-        <Image src={BusLogo} className="w-[6.5rem] rounded-md" />
+        <Link href="/">
+          <Image src={BusLogo} className="w-[6.5rem] rounded-md" />
+        </Link>
       </div>
       <div>
         <DropdownMenu>
@@ -25,8 +33,22 @@ const Navbar = () => {
             <MdKeyboardArrowDown />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem>Dashboard</DropdownMenuItem>
-            <DropdownMenuItem>Ticket Booking</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/dashboard">Dashboard</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <button
+                onClick={() => {
+                  stops.start.length > 0 && stops.end.length > 0
+                    ? router.push("/booking")
+                    : toast.error(
+                        "Please select both destinations to start booking"
+                      ) && setError(true);
+                }}
+              >
+                Ticket Booking
+              </button>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

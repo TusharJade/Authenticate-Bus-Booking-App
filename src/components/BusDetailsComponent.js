@@ -33,7 +33,7 @@ const BusDetailsComponent = ({ busData }) => {
               <span className="text-[13px]">{busData.rating}</span>
             </div>
             <div className="text-[14px] font-light">
-              {busData.seatsAvailable}
+              {busData.seatsAvailable - busData.seatsBooked.length}
               <span className="text-[#7e7e8c]"> Seats available</span>
             </div>
           </div>
@@ -69,6 +69,7 @@ const BusDetailsComponent = ({ busData }) => {
                       seat={10}
                       startingSeat={1}
                       deck={"L"}
+                      busNumber={busData.busNumber}
                     />
                   </div>
                   <div className="absolute top-14 right-[1.0625rem]">
@@ -76,6 +77,7 @@ const BusDetailsComponent = ({ busData }) => {
                       currentSelected={currentSelected}
                       setCurrentSelected={setCurrentSelected}
                       seatNum={"31L"}
+                      busNumber={busData.busNumber}
                     />
                   </div>
                   <div className="flex gap-3.5 ml-10 absolute top-[130px]">
@@ -85,6 +87,7 @@ const BusDetailsComponent = ({ busData }) => {
                       seat={5}
                       startingSeat={11}
                       deck={"L"}
+                      busNumber={busData.busNumber}
                     />
                   </div>
                 </div>
@@ -102,6 +105,7 @@ const BusDetailsComponent = ({ busData }) => {
                       seat={10}
                       startingSeat={16}
                       deck={"U"}
+                      busNumber={busData.busNumber}
                     />
                   </div>
                   <div className="absolute top-28 right-[1.0625rem]">
@@ -109,6 +113,7 @@ const BusDetailsComponent = ({ busData }) => {
                       currentSelected={currentSelected}
                       setCurrentSelected={setCurrentSelected}
                       seatNum={"32U"}
+                      busNumber={busData.busNumber}
                     />
                   </div>
                   <div className="flex gap-3.5 ml-10 absolute top-[9.375rem]">
@@ -118,6 +123,7 @@ const BusDetailsComponent = ({ busData }) => {
                       seat={5}
                       startingSeat={26}
                       deck={"U"}
+                      busNumber={busData.busNumber}
                     />
                   </div>
                 </div>
@@ -148,7 +154,7 @@ const BusDetailsComponent = ({ busData }) => {
               <SeatBookingContainer
                 currentSelected={currentSelected}
                 setCurrentSelected={setCurrentSelected}
-                busData={busData}
+                busDataPrev={busData}
               />
             )}
           </div>

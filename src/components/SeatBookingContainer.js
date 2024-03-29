@@ -4,14 +4,23 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogClose,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
+import { useBusBookingContext } from "@/context/BusBookingContext";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 
-const SeatBookingContainer = ({ currentSelected, busData }) => {
+const SeatBookingContainer = ({
+  currentSelected,
+  busDataPrev,
+  setCurrentSelected,
+}) => {
+  const { busData, setBusData } = useBusBookingContext();
   const [userData, setUserData] = useState([
-    { name: "", gender: "", gmail: "", date: "" },
+    { name: "", gender: "", gmail: "", seatNum: "" },
   ]);
+  const closeRef = useRef();
 
   useEffect(() => {
     const newData = currentSelected.map((seatNum) => ({
@@ -23,7 +32,39 @@ const SeatBookingContainer = ({ currentSelected, busData }) => {
     setUserData(newData);
   }, [currentSelected]);
 
-  console.log("useData", userData);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setBusData((prev) =>
+      prev.map((newBusData) =>
+        newBusData.busNumber === busDataPrev.busNumber
+          ? {
+              ...newBusData,
+              tickets: [...newBusData.tickets, userData],
+              seatsBooked: [...newBusData.seatsBooked, ...userData],
+            }
+          : newBusData
+      )
+    );
+    toast.success(
+      "Ticket booked successful check dashboard view to see tickit"
+    );
+    setCurrentSelected([]);
+    localStorage.setItem(
+      "BUSINFO",
+      JSON.stringify(
+        busData.map((prevBus) =>
+          prevBus.busNumber === busDataPrev.busNumber
+            ? {
+                ...prevBus,
+                tickets: [...prevBus.tickets, userData],
+                seatsBooked: [...prevBus.seatsBooked, ...userData],
+              }
+            : prevBus
+        )
+      )
+    );
+    closeRef.current.click();
+  };
 
   return (
     <div className="bg-white w-[18rem] pb-3 px-4 mt-28 shadow-md">
@@ -32,8 +73,12 @@ const SeatBookingContainer = ({ currentSelected, busData }) => {
         <div className="w-1 h-1 bg-black rounded-full"></div>
         <div className="border-dashed border-[0.1px] border-gray-500 absolute -left-2.5 top-4 w-6 rotate-90"></div>
         <div className="w-1 h-1 bg-gray-400 rounded-full mt-[25px]"></div>
-        <span className="absolute -top-2 left-2.5">Mumbai</span>
-        <span className="absolute top-5 left-2.5">Kalyan</span>
+        <span className="absolute -top-2 left-2.5">
+          {JSON.parse(localStorage.getItem("INFO")).location.start}
+        </span>
+        <span className="absolute top-5 left-2.5">
+          {JSON.parse(localStorage.getItem("INFO")).location.end}
+        </span>
       </div>
       <div className="border-y mt-2 py-3 border-[#ddd] text-[14px] font-medium flex justify-between items-center">
         <span className="text-[15px] font-medium">Seat No.</span>
@@ -45,7 +90,7 @@ const SeatBookingContainer = ({ currentSelected, busData }) => {
       <div className="flex justify-between text-[12.5px] mt-1">
         <div>Amount</div>
         <div className="font-semibold">
-          INR {currentSelected.length * busData.fare}
+          INR {currentSelected.length * busDataPrev.fare}
         </div>
       </div>
 
@@ -62,7 +107,7 @@ const SeatBookingContainer = ({ currentSelected, busData }) => {
               Please fill the details of the passengers
             </DialogDescription>
           </DialogHeader>
-          <form>
+          <form onSubmit={submitHandler}>
             <div className="max-h-[20rem] overflow-auto scrollbar-container">
               {currentSelected.map((seatNum, i) => (
                 <div
@@ -123,7 +168,7 @@ const SeatBookingContainer = ({ currentSelected, busData }) => {
                         type="radio"
                         id={`${"Male" + i}`}
                         value="Male"
-                        name="gender"
+                        name={`${"gender" + i}`}
                         className="cursor-pointer"
                         required
                         onChange={(e) =>
@@ -148,7 +193,7 @@ const SeatBookingContainer = ({ currentSelected, busData }) => {
                         type="radio"
                         id={`${"Female" + i}`}
                         value="Female"
-                        name="gender"
+                        name={`${"gender" + i}`}
                         className="cursor-pointer"
                         required
                         onChange={(e) =>
@@ -173,7 +218,11 @@ const SeatBookingContainer = ({ currentSelected, busData }) => {
               ))}
             </div>
             <div className="flex justify-center items-center">
-              <button className="text-white font-light text-[14.5px] bg-[#d84e55] py-1 w-24 rounded mt-4">
+              <DialogClose ref={closeRef}></DialogClose>
+              <button
+                className="text-white font-light text-[14.5px] bg-[#d84e55] py-1 w-24 rounded mt-4"
+                type="submit"
+              >
                 Book
               </button>
             </div>

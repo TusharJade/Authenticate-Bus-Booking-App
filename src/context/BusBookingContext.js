@@ -1,36 +1,45 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const BusBookingContext = createContext(null);
 
 export const BusBookingContextProvider = ({ children }) => {
   const [busData, setBusData] = useState([
     {
-      busNumber: 1,
+      busNumber: 4930,
       busName: "SHRI MAMATA TRAVELS",
       fare: 450,
       seatsAvailable: 32,
       rating: 4.2,
       seatsBooked: [],
+      tickets: [],
     },
     {
-      busNumber: 2,
+      busNumber: 9039,
       busName: "Rameshwar travels",
       fare: 800,
       seatsAvailable: 32,
       rating: 4.4,
       seatsBooked: [],
+      ticket: [],
     },
     {
-      busNumber: 3,
+      busNumber: 8502,
       busName: "Hey Rajeshwar Travels",
       fare: 550,
       seatsAvailable: 32,
       rating: 3.9,
       seatsBooked: [],
+      ticket: [],
     },
   ]);
+
+  useEffect(() => {
+    if (localStorage.getItem("BUSINFO")) {
+      setBusData(JSON.parse(localStorage.getItem("BUSINFO")));
+    }
+  }, []);
 
   return (
     <BusBookingContext.Provider value={{ busData, setBusData }}>

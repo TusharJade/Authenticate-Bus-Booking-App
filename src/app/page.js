@@ -32,7 +32,7 @@ export default function Home() {
   }, [date, stops]);
   return (
     <div>
-      <Navbar />
+      <Navbar stops={stops} setError={setError} />
       <div className="relative">
         <div className="w-full flex items-center justify-center absolute top-[6rem] font-sans">
           <div className="text-[#ffffff] text-[2rem] font-bold">
