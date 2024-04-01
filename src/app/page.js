@@ -46,7 +46,7 @@ export default function Home() {
             onClick={() => setError(false)}
           >
             <span
-              className={`mr-auto ml-6 ${
+              className={`mr-auto ml-0 sm:ml-6 ${
                 error ? "text-red-600" : "text-gray-400"
               }`}
             >
@@ -54,7 +54,7 @@ export default function Home() {
             </span>
             <input
               id="start"
-              className="mt-1 ml-0 sm:ml-6 w-[88%] outline-none font-medium cursor-pointer text-[1.3rem]"
+              className="mt-1 ml-0 sm:ml-6 w-full sm:w-[88%] outline-none font-medium cursor-pointer text-[1.3rem]"
               onChange={(e) =>
                 setStops((prev) => ({ ...prev, start: e.target.value }))
               }
@@ -67,7 +67,7 @@ export default function Home() {
             onClick={() => setError(false)}
           >
             <span
-              className={`mr-auto ml-6 ${
+              className={`mr-auto ml-0 sm:ml-6 ${
                 error ? "text-red-600" : "text-gray-400"
               }`}
             >
@@ -75,7 +75,7 @@ export default function Home() {
             </span>
             <input
               id="end"
-              className="mt-1 ml-0 sm:ml-6 w-[88%] font-medium outline-none cursor-pointer text-[1.3rem]"
+              className="mt-1 ml-0 sm:ml-6 w-full sm:w-[88%] font-medium outline-none cursor-pointer text-[1.3rem]"
               onChange={(e) =>
                 setStops((prev) => ({ ...prev, end: e.target.value }))
               }
