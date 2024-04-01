@@ -66,7 +66,7 @@ const SeatBookingContainer = ({
   };
 
   return (
-    <div className="bg-white w-[18rem] pb-3 px-4 mt-28 shadow-md">
+    <div className="bg-white max-w-[18rem] pb-3 px-4 mt-8 lg:mt-28 shadow-md">
       <div className="font-medium mt-2">Boarding & Dropping</div>
       <div className="relative text-[14px] mt-3.5 mb-5">
         <div className="w-1 h-1 bg-black rounded-full"></div>

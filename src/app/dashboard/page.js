@@ -10,7 +10,7 @@ const page = () => {
     <div>
       <Navbar />
       {busData.find((prevBus) => prevBus?.seatsBooked?.length > 0) ? (
-        <div className="flex flex-wrap m-6 gap-x-5 gap-y-2">
+        <div className="flex flex-wrap m-6 gap-x-5 gap-y-2 justify-center sm:justify-normal">
           {busData?.map((prevBus) =>
             prevBus?.seatsBooked?.length > 0
               ? prevBus?.seatsBooked?.map((busTicket) => (

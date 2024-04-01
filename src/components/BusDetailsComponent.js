@@ -13,7 +13,7 @@ const BusDetailsComponent = ({ busData }) => {
       {/* buses */}
       <div className="border border-[#ddd] mx-4">
         {/* basic bus details */}
-        <div className="flex relative bg-white pl-3 pr-6 py-2 ">
+        <div className="flex justify-between relative bg-white pl-3 pr-2 sm:pr-6 pt-2 pb-4 sm:pb-2">
           <div className="min-w-max pb-10">
             <div className="text-[0.9063rem] font-medium">
               {busData.busName}
@@ -22,17 +22,19 @@ const BusDetailsComponent = ({ busData }) => {
               A/C Sleeper (2+1)
             </div>
           </div>
-          <div className="flex gap-12 justify-end w-full">
-            <div className="text-[0.9375rem] font-light">
+          <div className="flex flex-col sm:flex-row gap-1 sm:gap-12 justify-start items-end sm:items-start sm:justify-end w-max sm:w-full">
+            <div className="text-[0.75rem] sm:text-[0.9375rem] font-light">
               Starts from INR <span className="font-bold">{busData.fare}</span>
             </div>
             <div className="bg-green-500 w-11 h-5 text-white rounded flex justify-center items-center">
               <span className="mb-[2px]">
                 <MdStarRate />
               </span>
-              <span className="text-[13px]">{busData.rating}</span>
+              <span className="text-[0.75rem] sm:text-[13px]">
+                {busData.rating}
+              </span>
             </div>
-            <div className="text-[14px] font-light">
+            <div className="text-[0.75rem] sm:text-[14px] font-light">
               {busData.seatsAvailable - busData.seatsBooked.length}
               <span className="text-[#7e7e8c]"> Seats available</span>
             </div>
@@ -48,15 +50,17 @@ const BusDetailsComponent = ({ busData }) => {
         </div>
 
         {seatsView && (
-          <div className="w-full flex items-center justify-center pb-5 bg-[#ededed]">
+          <div className="w-full flex lg:flex-row flex-col items-center justify-center pb-5 bg-[#ededed]">
             {/* seats booking */}
-            <div className="mt-5">
-              <div className="text-white bg-red-600 text-[14px] font-light max-w-max px-3 py-1">
+            <div className="mt-5 sm:w-auto w-full">
+              <div className="text-white bg-red-600 text-[14px] font-light max-w-max px-3 py-1 sm:mx-0 mx-4">
                 Click on an Available seat to proceed with your transaction
               </div>
               {/* lower deck */}
-              <div>
-                <div className="font-light text-[14.5px] mt-4">Lower Deck</div>
+              <div className="sm:rotate-0 rotate-90 sm:mt-0 mt-[6rem]">
+                <div className="font-light text-[14.5px] mt-4 sm:block hidden">
+                  Lower Deck
+                </div>
                 <div className="bg-white h-[12rem] w-[25rem] border-l-gray-500 border-l-[6px] relative">
                   <div className="pt-5 pl-1">
                     <TbSteeringWheel className="-rotate-90 text-gray-300 text-[1.4rem]" />
@@ -93,8 +97,8 @@ const BusDetailsComponent = ({ busData }) => {
                 </div>
               </div>
               {/* upper deck */}
-              <div>
-                <div className="font-light text-[14.5px] mt-4 mb-1">
+              <div className="sm:rotate-0 rotate-90 sm:mt-0 mt-[13rem]">
+                <div className="font-light text-[14.5px] mt-4 mb-1 sm:block hidden">
                   Upper Deck
                 </div>
                 <div className="bg-white h-[12rem] w-[25rem] border-l-gray-500 border-l-[6px] relative">
@@ -131,7 +135,7 @@ const BusDetailsComponent = ({ busData }) => {
             </div>
 
             {/* symbols of booking */}
-            <div className="ml-20 mb-auto mt-10">
+            <div className="ml-0 lg:ml-20 mb-auto mt-[10rem] sm:mt-8 lg:mt-10">
               <div className="font-sans font-bold mb-1">SEAT LEGEND</div>
               {["Available", "Female", "Unavailable"].map((item, i) => (
                 <div className="flex gap-x-2 items-center" key={i}>
